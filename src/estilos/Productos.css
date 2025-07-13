@@ -1,0 +1,10 @@
+.productos-contenedor {
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 400px;
+    font-weight: bold;
+}
+

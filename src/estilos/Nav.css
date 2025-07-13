@@ -1,0 +1,47 @@
+.nav{
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+.nav-ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+}
+
+.nav-ul *{
+    color: white;
+    text-decoration: none;
+
+}
+
+.nav-ul *:hover{
+    color: #ff6d08;
+    background-color:rgba(99, 93, 102, 0.382) ;
+    transform: translateY(-3%)
+}
+
+.nav-carritoCantidad {
+    background-color: red;
+    color: white;
+    width: 24px;
+    height: 24px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    border-radius: 50%;
+    font-weight: bold;
+    /* top: 0;
+    right: 0; */
+
+}
+
+.activo {
+    font-weight: bold;
+    color: rgb(41, 30, 6);
+    background-color: rgb(255, 157, 0);
+    border-radius: 5px;
+    padding: 5px;
+}
