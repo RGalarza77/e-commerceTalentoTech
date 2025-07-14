@@ -33,7 +33,7 @@ export function crearUsuario(email, password){
                 // ...
               })
               .catch((error) => {
-                console.log(error);
+                console.log(error.code);
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 rej(error);

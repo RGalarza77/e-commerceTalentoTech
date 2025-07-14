@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { dispararAlerta } from '../assets/SweetAlet';
 import { agregarProducto } from '../assets/requests';
+import { useAuthContext } from '../contextos/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 function FormularioProducto({ }) {
+
+  const {admin} = useAuthContext();
+
   const [producto, setProducto] = useState({
     nombre: '',
     precio: '',
@@ -42,12 +47,13 @@ function FormularioProducto({ }) {
   //   })
   // };
 
+
   //handleSubmit con validaciones
   const handleSubmit2 = (e) => {
     e.preventDefault();
     if (validarFormulario() == true) {
       agregarProducto(producto).then((data) => {// Llamada a la función para agregar el producto
-        setProducto({ nombre: '', precio: '', descripcion: '' }); // Limpiar el formulario
+        setProducto({ nombre: '', precio: '', descripcion: '', imagen: '' }); // Limpiar el formulario
         dispararAlerta('Producto agregado con exito',"", "success", "Ok");
       }).catch((error) => {
         dispararAlerta('Error al agregar el producto', error, "error", "Cerrar");
@@ -57,37 +63,46 @@ function FormularioProducto({ }) {
     }
   };
 
+  //"RutaProtegida"- Si no es Admin sera redirigido al Home 
+  if(!admin){
+    return(
+      <Navigate to="/" replace/>
+    )
+  }else{
+    
+    return (<form onSubmit={handleSubmit2}>
+      <h2>Agregar Producto</h2>
+      <div>
+        <label>Nombre:</label>
+        <input
+          type="text" name="nombre" value={producto.nombre} onChange={handleChange} required />
+      </div>
+      <div>
+        <label>Imagen:</label>
+        <input
+          type="text" name="imagen" value={producto.imagen} onChange={handleChange} required />
+      </div>
+      <div>
+        <label>Precio:</label>
+        <input type="number" name="precio" value={producto.precio} onChange={handleChange} required
+          min="0" />
+      </div>
+  
+      <div>
+        <label>Descripción:</label>
+        <textarea
+          name="descripcion"
+          value={producto.descripcion}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <button type="submit">Agregar Producto</button>
+    </form>
+    );
+  }
 
-  return (<form onSubmit={handleSubmit2}>
-    <h2>Agregar Producto</h2>
-    <div>
-      <label>Nombre:</label>
-      <input
-        type="text" name="nombre" value={producto.nombre} onChange={handleChange} required />
-    </div>
-    <div>
-      <label>Imagen:</label>
-      <input
-        type="text" name="imagen" value={producto.imagen} onChange={handleChange} required />
-    </div>
-    <div>
-      <label>Precio:</label>
-      <input type="number" name="precio" value={producto.precio} onChange={handleChange} required
-        min="0" />
-    </div>
 
-    <div>
-      <label>Descripción:</label>
-      <textarea
-        name="descripcion"
-        value={producto.descripcion}
-        onChange={handleChange}
-        required
-      />
-    </div>
-    <button type="submit">Agregar Producto</button>
-  </form>
-  );
 }
 
 export default FormularioProducto;

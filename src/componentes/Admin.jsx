@@ -3,11 +3,12 @@ import { useAuthContext } from "../contextos/AuthContext";
 import { Navigate } from "react-router-dom";
 
 export default function(){
-    const {usuario} = useAuthContext();
+    const {admin} = useAuthContext();
 
-    if(!usuario){
+    //"RutaProtegida"- si no es Admin sera redirigido al Home
+    if(!admin){
         return(
-            <Navigate to="/login" replace/>
+            <Navigate to="/" replace/>
         )
     }
 
