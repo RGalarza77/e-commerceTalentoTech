@@ -14,7 +14,7 @@ import ProductoDetalle from './componentes/ProductoDetalle'
 import Admin from './componentes/Admin'
 import Login from './componentes/Login'
 import FormularioProducto from './componentes/FormularioProducto'
-import { dispararAlerta } from './assets/SweetAlet'
+import FormularioEdicion from './componentes/FormularioEdicion'
 
 function App() {
 
@@ -34,6 +34,7 @@ function App() {
           <Route path='/productos/:id' element={<ProductoDetalle />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/admin/agregarProductos' element={<FormularioProducto/> }/>
+          <Route path='/admin/editarProducto/:id' element={<FormularioEdicion/> }/>
         </Routes>
 
       </div>

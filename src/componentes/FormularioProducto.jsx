@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { dispararAlerta } from '../assets/SweetAlet';
-import { agregarProducto } from '../assets/requests';
 import { useAuthContext } from '../contextos/AuthContext';
 import { Navigate } from 'react-router-dom';
+import { useProductosContext } from '../contextos/ProductosContext';
 
 function FormularioProducto({ }) {
-
+  const {agregarProducto} = useProductosContext();
   const {admin} = useAuthContext();
 
   const [producto, setProducto] = useState({

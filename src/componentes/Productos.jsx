@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "../estilos/Productos.css"
 import Carta from "./Carta";
+import { useProductosContext } from "../contextos/ProductosContext";
 
 export default function Productos() {
-    const [productos, setProductos] = useState([]);
+    const {productos, obtenerProductos} = useProductosContext();
+    //const [productos, setProductos] = useState([]);
 
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
 
     { /*Importar datos desde una API*/
         useEffect(() => {
-            fetch('https://682e9336746f8ca4a47d86df.mockapi.io/Productos')
-                .then((respuesta) =>
-                    respuesta.json()
-                ).then((datos) => {
-                    console.log(datos);
-                    setProductos(datos);
-                    setCargando(false);
-                })
-                .catch((error) => {
-                    console.log("Error", error);
-                    setError('Hubo un problema al cargar los productos');
-                    setCargando(false);
-                });
+            obtenerProductos().then((productos) => {
+                setCargando(false);
+            }).catch((error) => {
+                setError('Hubo un problema al cargar los productos');
+                setCargando(false);
+            })
         }, []);
     }
 
@@ -51,7 +46,7 @@ export default function Productos() {
     //         setTotal(total + p.precio * p.cantidad);
     //     }))
     // }
-    
+
 
     /*Logica para mostrar Productos, mensaje Cargando o Error*/
     if (cargando) {
@@ -62,7 +57,7 @@ export default function Productos() {
         return (
             <div className="productos-contenedor">
                 {productos.map((producto) => (
-                    <Carta producto={producto}/>
+                    <Carta producto={producto} />
                 ))}
             </div>
 
