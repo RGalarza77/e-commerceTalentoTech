@@ -11,7 +11,7 @@ export default function Login() {
     const [password, setContrasenia] = useState('');
     const [mostrarInicioSesion, setMostrar] = useState(true);
     //accedo a la propiedad 'login' del useAuthContext
-    const { login, usuario, logout } = useAuthContext();
+    const { login, usuario, logout, admin } = useAuthContext();
 
     const navigate = useNavigate();
 
@@ -75,7 +75,7 @@ export default function Login() {
     }
 
     //si un usuario valido se logueo, aprece el boton cerrar sesion 
-    if (usuario) {
+    if (usuario || admin) {
         return (
             <form onSubmit={cerrarSesion}>
                 <button type='submit'>Cerrar Sesion</button>

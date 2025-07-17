@@ -27,8 +27,23 @@ export function AuthProvider({ children }) {
     setAdmin(false);
   };
 
+  function verificacionLogueo(){
+    return(
+      new Promise ((res, rej) => {
+        const tokenUsuario = localStorage.getItem("authToken-ecommerce");
+        if(tokenUsuario && tokenUsuario == "falso-token-admin@gmail.com"){ //si existe el token y es el del admin
+          setAdmin(true);
+          return;
+        }
+        if(tokenUsuario){ //si existe el token
+          setUsuario(tokenUsuario);
+        }
+      })
+    );
+  }
+
   return (
-    <AuthContext.Provider value={{ usuario, login, logout, admin }}>
+    <AuthContext.Provider value={{ usuario, login, logout, admin, verificacionLogueo }}>
       {children}
     </AuthContext.Provider> );
 }

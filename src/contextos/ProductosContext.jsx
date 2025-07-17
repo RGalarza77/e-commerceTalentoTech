@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { dispararAlerta } from "../assets/SweetAlet";
 
 
 const ProductosContext = createContext();
@@ -76,10 +77,56 @@ export function ProductosProvider({ children }) {
         )
     }
 
+    function editarProducto(producto) {
+        return (
+            new Promise(async (res, rej) => {
+                try {
+                    const respuesta = await fetch(`https://682e9336746f8ca4a47d86df.mockapi.io/Productos/${producto.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(producto),
+                    });
+                    if (!respuesta.ok) {
+                        throw new Error('Error al actualizar el producto.');
+                    }
+                    const data = await respuesta.json();
+                    res(data);
+
+                } catch (error) {
+                    console.error(error.message);
+                    rej(error);
+                }
+            })
+        );
+    }
+
+    function eliminarProducto(id) {
+        const confirmar = window.confirm('¿Estás seguro de eliminar?');
+        if (confirmar) {
+            return (
+                new Promise(async (res, rej) => {
+                    try {
+                        const respuesta = await fetch(`https://682e9336746f8ca4a47d86df.mockapi.io/Productos/${id}`, {
+                            method: 'DELETE',
+                        });
+                        if (!respuesta.ok) throw new Error('Error al eliminar');
+                        dispararAlerta('Producto Eliminado','Producto eliminado correctamente.', "success", "Ok");
+                        res();
+                    } catch (error) {
+                        console.error(error.message);
+                        rej(error);
+                    }
+                })
+            )
+        }
+    }
+
 
     return (
 
-        < ProductosContext.Provider value={{ obtenerProductos, productos, agregarProducto, obtenerProducto, productoEncontrado }}>
+        < ProductosContext.Provider value={{ obtenerProductos, productos, agregarProducto, obtenerProducto, productoEncontrado, editarProducto, eliminarProducto }}>
             {children}
         </ProductosContext.Provider >
     );

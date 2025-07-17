@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react";
 import { useProductosContext } from "../contextos/ProductosContext";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import { dispararAlerta } from "../assets/SweetAlet";
+import { useAuthContext } from "../contextos/AuthContext";
 
 
 export default function FormularioEdicion({ }) {
-    const { obtenerProducto, productoEncontrado } = useProductosContext();
+    const { obtenerProducto, productoEncontrado, editarProducto } = useProductosContext();
     const { id } = useParams();
+    const {admin} = useAuthContext();
     const [producto, setProducto] = useState(productoEncontrado);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
+
+    /*Proteccion para que solo admin ingrese a este formulario*/
+    if(!admin){
+        return(
+            <Navigate to='/login'  replace></Navigate>
+        );
+    }
 
     useEffect(() => {
         obtenerProducto(id).then(() => {
@@ -20,30 +30,43 @@ export default function FormularioEdicion({ }) {
         })
     }, [id]); //[id] permite que el useEffect se ejecute cada vez que cambia un id
 
+
+    /*Validaciones*/
+    const validarFormulario = () => {
+
+        if (!producto.nombre.trim()) {
+            return ('El nombre es obligatorio.');
+        }
+        if (!producto.precio || producto.precio <= 0) {
+            return ('El precio debe ser mayor a 0.');
+        }
+        if (!producto.descripcion.trim() || producto.descripcion.length < 10) {
+            return ('La descripción debe tener al menos 10 caracteres.');
+        }
+        if (!producto.imagen.trim()) {
+            return ('La URL de la imagen no debe estas vacia');
+        } else {
+            return true;
+        }
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProducto({ ...producto, [name]: value });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const respuesta = await fetch(`https://mockapi.io/api/v1/productos/${producto.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(producto),
-            });
-            if (!respuesta.ok) {
-                throw new Error('Error al actualizar el producto.');
-            }
-            const data = await respuesta.json();
-            onActualizar(data);
-            alert('Producto actualizado correctamente.');
-        } catch (error) {
-            console.error(error.message);
-            alert('Hubo un problema al actualizar el producto.');
+        if (validarFormulario() == true) {
+            editarProducto(producto).then((prod) => {
+                dispararAlerta('Actualizacion Producto', 'Producto actualizado correctamente.', 'success', 'Ok');
+            }).catch((error) => {
+                dispararAlerta('Error Actualizacion Producto', 'Hubo un problema al actualizar el producto.', 'error', 'Ok');
+            })
+        } else {
+            dispararAlerta('Error al agregar el producto', validarFormulario(), "error", "Cerrar");
         }
+
     };
     return (
         <form onSubmit={handleSubmit}>

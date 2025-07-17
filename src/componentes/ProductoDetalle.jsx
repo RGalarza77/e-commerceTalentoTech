@@ -1,16 +1,18 @@
 import "../estilos/ProductoDetalle.css";
 import { dispararAlerta } from "../assets/SweetAlet";
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCarritoContext } from "../contextos/CarritoContext";
 import { useAuthContext } from "../contextos/AuthContext";
 import { useProductosContext } from "../contextos/ProductosContext";
 
 
 export default function ProductoDetalle({  }) {
+    const navegar= useNavigate();
+
     const {agregarAlCarrito} = useCarritoContext();
     const { id } = useParams();
-    const {obtenerProducto, productoEncontrado} = useProductosContext();
+    const {obtenerProducto, productoEncontrado, eliminarProducto} = useProductosContext();
     const [cantidad, setCantidad] = useState(1);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
@@ -28,6 +30,14 @@ export default function ProductoDetalle({  }) {
     }, [id]); //[id] permite que el useEffect se ejecute cada vez que cambia un id
 
     /*funciones*/
+    function dispararEliminar(){
+        eliminarProducto(id).then(()=> {
+            navegar("/productos"); /*redirecciona a la ventana productos al eliminar*/
+        }).catch((error) =>{
+            dispararAlerta("Error Eliminar Producto","Hubo un problema al eliminar el producto."+error.message,"error","Ok");
+        })
+    }
+
     function agregarProducto() {
         if (cantidad < 1) return;
         dispararAlerta("Producto Agregado", "Producto agregado al carrito", "success", "Ok");
@@ -63,6 +73,7 @@ export default function ProductoDetalle({  }) {
                 </div>
                 {admin ? <Link to={"/admin/editarProducto/"+id}><button className="detalle-agregarCarrito">Editar Producto</button> </Link> : 
                 <button className="detalle-agregarCarrito" onClick={agregarProducto}>Agregar al carrito</button>}
+                {admin ? <button onClick={dispararEliminar}>Eliminar producto</button> : <></>}
             </div>
         </div>
     );

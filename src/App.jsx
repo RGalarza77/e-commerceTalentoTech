@@ -4,7 +4,6 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './layouts/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navigate } from 'react-router-dom'
 import Carrito from './componentes/Carrito'
 import Productos from './componentes/Productos'
 import Nav from './componentes/Nav'
@@ -15,8 +14,15 @@ import Admin from './componentes/Admin'
 import Login from './componentes/Login'
 import FormularioProducto from './componentes/FormularioProducto'
 import FormularioEdicion from './componentes/FormularioEdicion'
+import { useAuthContext } from './contextos/AuthContext'
 
 function App() {
+
+  const {verificacionLogueo}= useAuthContext();
+
+  useEffect(() => {
+    verificacionLogueo()
+  }, [])
 
   return (
 
