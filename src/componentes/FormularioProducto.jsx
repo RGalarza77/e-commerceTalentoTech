@@ -3,10 +3,11 @@ import { dispararAlerta } from '../assets/SweetAlet';
 import { useAuthContext } from '../contextos/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { useProductosContext } from '../contextos/ProductosContext';
+import { Helmet } from 'react-helmet';
 
 function FormularioProducto({ }) {
-  const {agregarProducto} = useProductosContext();
-  const {admin} = useAuthContext();
+  const { agregarProducto } = useProductosContext();
+  const { admin } = useAuthContext();
 
   const [producto, setProducto] = useState({
     nombre: '',
@@ -14,6 +15,8 @@ function FormularioProducto({ }) {
     descripcion: '',
     image: ''
   });
+
+  /*Validaciones*/
 
   const validarFormulario = () => {
 
@@ -32,6 +35,8 @@ function FormularioProducto({ }) {
       return true;
     }
   };
+
+  /*Funciones*/
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,23 +59,28 @@ function FormularioProducto({ }) {
     if (validarFormulario() == true) {
       agregarProducto(producto).then((data) => {// Llamada a la función para agregar el producto
         setProducto({ nombre: '', precio: '', descripcion: '', imagen: '' }); // Limpiar el formulario
-        dispararAlerta('Producto agregado con exito',"", "success", "Ok");
+        dispararAlerta('Producto agregado con exito', "", "success", "Ok");
       }).catch((error) => {
         dispararAlerta('Error al agregar el producto', error, "error", "Cerrar");
       })
-    }else{
-      dispararAlerta('Error al agregar el producto',validarFormulario(), "error", "Cerrar" );
+    } else {
+      dispararAlerta('Error al agregar el producto', validarFormulario(), "error", "Cerrar");
     }
   };
 
   //"RutaProtegida"- Si no es Admin sera redirigido al Home 
-  if(!admin){
-    return(
-      <Navigate to="/" replace/>
+  if (!admin) {
+    return (
+      <Navigate to="/" replace />
     )
-  }else{
-    
+  } else {
+
     return (<form onSubmit={handleSubmit2}>
+      {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
+      <Helmet>
+        <title>Agregar Producto | E-commerce</title>
+        <meta name="description" content="Agregar nuevos productos." />
+      </Helmet>
       <h2>Agregar Producto</h2>
       <div>
         <label>Nombre:</label>
@@ -87,7 +97,7 @@ function FormularioProducto({ }) {
         <input type="number" name="precio" value={producto.precio} onChange={handleChange} required
           min="0" />
       </div>
-  
+
       <div>
         <label>Descripción:</label>
         <textarea

@@ -6,6 +6,8 @@ import { AuthProvider } from './contextos/AuthContext.jsx'
 import { CarritoProvider } from './contextos/CarritoContext.jsx'
 import { ProductosProvider } from './contextos/ProductosContext.jsx'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ProductosProvider>

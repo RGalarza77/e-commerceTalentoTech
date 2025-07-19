@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../estilos/Productos.css"
 import Carta from "./Carta";
 import { useProductosContext } from "../contextos/ProductosContext";
+import { Helmet } from "react-helmet";
+
 
 export default function Productos() {
-    const {productos, obtenerProductos} = useProductosContext();
+    const { productos, obtenerProductos } = useProductosContext();
     //const [productos, setProductos] = useState([]);
 
     const [cargando, setCargando] = useState(true);
@@ -55,7 +57,14 @@ export default function Productos() {
         return <p>{error}</p>;
     } else {
         return (
+
             <div className="productos-contenedor">
+                {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
+                <Helmet>
+                    <title>Productos | E-commerce</title>
+                    <meta name="description" content="Explora nuestra variedad de productos." />
+                </Helmet>
+
                 {productos.map((producto) => (
                     <Carta producto={producto} />
                 ))}

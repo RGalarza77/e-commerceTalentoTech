@@ -3,20 +3,21 @@ import { useProductosContext } from "../contextos/ProductosContext";
 import { Navigate, useParams } from "react-router-dom";
 import { dispararAlerta } from "../assets/SweetAlet";
 import { useAuthContext } from "../contextos/AuthContext";
+import { Helmet } from "react-helmet";
 
 
 export default function FormularioEdicion({ }) {
     const { obtenerProducto, productoEncontrado, editarProducto } = useProductosContext();
     const { id } = useParams();
-    const {admin} = useAuthContext();
+    const { admin } = useAuthContext();
     const [producto, setProducto] = useState(productoEncontrado);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
 
     /*Proteccion para que solo admin ingrese a este formulario*/
-    if(!admin){
-        return(
-            <Navigate to='/login'  replace></Navigate>
+    if (!admin) {
+        return (
+            <Navigate to='/login' replace></Navigate>
         );
     }
 
@@ -50,6 +51,8 @@ export default function FormularioEdicion({ }) {
         }
     };
 
+    /*Funciones*/
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProducto({ ...producto, [name]: value });
@@ -69,7 +72,13 @@ export default function FormularioEdicion({ }) {
 
     };
     return (
+
         <form onSubmit={handleSubmit}>
+            {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
+            <Helmet>
+                <title>Editar Productos | E-commerce</title>
+                <meta name="description" content="Edicion de nuestros productos." />
+            </Helmet>
             <h2>Editar Producto</h2>
             <div>
                 <label>Nombre:</label>

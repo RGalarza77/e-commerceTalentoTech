@@ -73,7 +73,7 @@ export default function ProductoDetalle({  }) {
                 </div>
                 {admin ? <Link to={"/admin/editarProducto/"+id}><button className="detalle-agregarCarrito">Editar Producto</button> </Link> : 
                 <button className="detalle-agregarCarrito" onClick={agregarProducto}>Agregar al carrito</button>}
-                {admin ? <button onClick={dispararEliminar}>Eliminar producto</button> : <></>}
+                {admin ? <button className="detalle-agregarCarrito" onClick={dispararEliminar}>Eliminar producto</button> : <></>}
             </div>
         </div>
     );

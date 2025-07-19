@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import "../estilos/Carrito.css"
 import CartaCarrito from "./CartaCarrito";
-import {Navigate} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuthContext } from "../contextos/AuthContext";
 import { useCarritoContext } from "../contextos/CarritoContext";
+import { Helmet } from "react-helmet";
 
 export default function Carrito() {
-    const {usuario} = useAuthContext(); 
-    const {productosCarrito, vaciarCarrito, borrarProductoCarrito} = useCarritoContext();
+    const { usuario } = useAuthContext();
+    const { productosCarrito, vaciarCarrito, borrarProductoCarrito } = useCarritoContext();
 
     const total = productosCarrito.reduce(
         (subTotal, producto) => subTotal + producto.precio * producto.cantidad, 0
@@ -17,14 +18,19 @@ export default function Carrito() {
         borrarProductoCarrito(id);
     }
 
-    if(!usuario){
+    if (!usuario) {
         return (
-            <Navigate to="/login" replace/>
+            <Navigate to="/login" replace />
         )
     }
-    
+
     return (
         <div className="carrito-contenedor">
+            {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
+            <Helmet>
+                <title>Carrito | E-commerce</title>
+                <meta name="description" content="Carrito de nuetro E-commerce." />
+            </Helmet>
             <div className="carrito-titulos">
                 <h2>Nombre</h2>
                 <h2>Imagen</h2>

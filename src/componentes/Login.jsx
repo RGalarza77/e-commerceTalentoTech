@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../contextos/AuthContext';
 import { crearUsuario, logearseConEmail } from '../autenticacion/firebase';
 import { dispararAlerta } from '../assets/SweetAlet';
+import { Helmet } from 'react-helmet';
 
 
 export default function Login() {
@@ -36,7 +37,7 @@ export default function Login() {
             login(user) //si trajo a 'usuario', loguea a user
             dispararAlerta("Inicio de sesion exitoso!!", "", "success", "Ok")
         }).catch((error) => { // si trajo error, capturo error
-            if(error.code == "auth/invalid-credential") //Credenciales incorrectas
+            if (error.code == "auth/invalid-credential") //Credenciales incorrectas
                 dispararAlerta("Error al iniciar sesion", "Credenciales incorrectas", "error", "Cerrar");
             else //Errores por defecto
                 dispararAlerta("Error al iniciar sesion", "Error: " + error, "error", "Cerrar");
@@ -50,9 +51,9 @@ export default function Login() {
             login(user);
             dispararAlerta("Usuario creado con exito!!", "", "info", "Ok")
         }).catch((error) => {
-            if(error.code == "auth/weak-password") //Contraseña debil
+            if (error.code == "auth/weak-password") //Contraseña debil
                 dispararAlerta("Error al crear nuevo usuario", "La contraseña debe contener 6 o mas caracteres", "error", "Cerrar");
-            if(error.code == "auth/email-already-in-use") //Email ya utilizado
+            if (error.code == "auth/email-already-in-use") //Email ya utilizado
                 dispararAlerta("Error al crear nuevo usuario", "El email que intenta registrar ya esta en uso. Ingrese otro que no haya sido utilizado", "error", "Cerrar");
             else //Errores por defecto
                 dispararAlerta("Error al crear nuevo usuario", "Error: " + error, "error", "Cerrar");
@@ -81,61 +82,106 @@ export default function Login() {
                 <button type='submit'>Cerrar Sesion</button>
             </form>
         )
-    //Mostrar form de inicio de sesion con email
-    }else if (!usuario && mostrarInicioSesion){
+        //Mostrar form de inicio de sesion con email
+    } else if (!usuario && mostrarInicioSesion) {
+        {/* Inicio Sesion */ }
         return (
-            <div>
-                {/* Inicio Sesion */}
-                <form onSubmit={iniciarSesionConEmail}>
+            <div className='d-flex flex-column justify-content-center align-items-center '>
+                {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
+                <Helmet>
+                    <title>Login | E-commerce</title>
+                    <meta name="description" content="Login de nuestra tienda." />
+                </Helmet>
+                <form onSubmit={iniciarSesionConEmail} className=" d-flex flex-column justify-content-center align-items-center p-4 border rounded shadow w-50">
                     <h2>Iniciar sesión</h2>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            type="text"
-                            value={user}
-                            onChange={(e) => setUsuario(e.target.value)}
-                        />
+                    <div className="mb-3 w-50">
+                        <label className="form-label">Email</label>
+                        <input type="email" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="form-control" required />
                     </div>
-                    <div>
-                        <label>Contraseña:</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setContrasenia(e.target.value)}
-                        />
+                    <div className="mb-3 w-50">
+                        <label className="form-label">Contraseña</label>
+                        <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
                     </div>
-                    <button type="submit">Iniciar sesión</button>
+                    <button className="btn btn-success w-25 ">Ingresar</button>
+                    <button className="btn btn-dark w-25" onClick={mostrarFormulario}>Registrarse</button>
                 </form>
-                <button onClick={mostrarFormulario}>Registrarse</button>
             </div>
+
+            // /* form iniciar sesion sin bootstrap*/
+            // <div>
+            // <form onSubmit={iniciarSesionConEmail}>
+            //     <h2>Iniciar sesión</h2>
+            //     <div>
+            //         <label>Email:</label>
+            //         <input
+            //             type="text"
+            //             value={user}
+            //             onChange={(e) => setUsuario(e.target.value)}
+            //         />
+            //     </div>
+            //     <div>
+            //         <label>Contraseña:</label>
+            //         <input
+            //             type="password"
+            //             value={password}
+            //             onChange={(e) => setContrasenia(e.target.value)}
+            //         />
+            //     </div>
+            //     <button type="submit">Iniciar sesión</button>
+            // </form>
+            // <button onClick={mostrarFormulario}>Registrarse</button>
+
+            // </div>
         );
-    //Mostrar form de registro
-    }else {
+        //Mostrar form de registro
+    } else {
+        {/* Registro */ }
         return (
-            <div>
-                {/* Registro */}
-                <form onSubmit={registrarUsuario}>
+            < div className='d-flex flex-column justify-content-center align-items-center ' >
+                <Helmet>
+                    <title>Registro Usuario | E-commerce</title>
+                    <meta name="description" content="Registro para nuevos usuarios de nuestra e-commerce." />
+                </Helmet>
+                <form onSubmit={registrarUsuario} className=" d-flex flex-column justify-content-center align-items-center p-4 border rounded shadow w-50">
                     <h2>Registrarse</h2>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            type="text"
-                            value={user}
-                            onChange={(e) => setUsuario(e.target.value)}
-                        />
+                    <div className="mb-3 w-50">
+                        <label className="form-label">Email</label>
+                        <input type="email" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="form-control" required />
                     </div>
-                    <div>
-                        <label>Contraseña:</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setContrasenia(e.target.value)}
-                        />
+                    <div className="mb-3 w-50">
+                        <label className="form-label">Contraseña</label>
+                        <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
                     </div>
-                    <button type="submit">Registrarse</button>
+                    <button className="btn btn-success w-25 ">Registrarse</button>
+                    <button className="btn btn-dark w-25" onClick={mostrarFormulario}>Iniciar Sesión</button>
                 </form>
-                <button onClick={mostrarFormulario}>Iniciar Sesion</button>
             </div>
+
+
+            // /*form registro sin bootstrap */
+            // <div>
+            //     <form onSubmit={registrarUsuario}>
+            //         <h2>Registrarse</h2>
+            //         <div>
+            //             <label>Email:</label>
+            //             <input
+            //                 type="text"
+            //                 value={user}
+            //                 onChange={(e) => setUsuario(e.target.value)}
+            //             />
+            //         </div>
+            //         <div>
+            //             <label>Contraseña:</label>
+            //             <input
+            //                 type="password"
+            //                 value={password}
+            //                 onChange={(e) => setContrasenia(e.target.value)}
+            //             />
+            //         </div>
+            //         <button type="submit">Registrarse</button>
+            //     </form>
+            //     <button onClick={mostrarFormulario}>Iniciar Sesion</button>
+            // </div >
         );
     }
 
