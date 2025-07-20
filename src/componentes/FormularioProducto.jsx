@@ -4,6 +4,8 @@ import { useAuthContext } from '../contextos/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { useProductosContext } from '../contextos/ProductosContext';
 import { Helmet } from 'react-helmet';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function FormularioProducto({ }) {
   const { agregarProducto } = useProductosContext();
@@ -59,7 +61,7 @@ function FormularioProducto({ }) {
     if (validarFormulario() == true) {
       agregarProducto(producto).then((data) => {// Llamada a la función para agregar el producto
         setProducto({ nombre: '', precio: '', descripcion: '', imagen: '' }); // Limpiar el formulario
-        dispararAlerta('Producto agregado con exito', "", "success", "Ok");
+        toast.success("Producto agregado correctamente!");
       }).catch((error) => {
         dispararAlerta('Error al agregar el producto', error, "error", "Cerrar");
       })
@@ -76,11 +78,13 @@ function FormularioProducto({ }) {
   } else {
 
     return (<form onSubmit={handleSubmit2}>
+
       {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
       <Helmet>
         <title>Agregar Producto | E-commerce</title>
         <meta name="description" content="Agregar nuevos productos." />
       </Helmet>
+
       <h2>Agregar Producto</h2>
       <div>
         <label>Nombre:</label>
@@ -108,6 +112,7 @@ function FormularioProducto({ }) {
         />
       </div>
       <button type="submit">Agregar Producto</button>
+      <ToastContainer />
     </form>
     );
   }

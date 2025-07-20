@@ -1,4 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
+import { logearseConGmail } from '../autenticacion/firebase';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 // Crear el contexto de autenticación
 const AuthContext = createContext();
@@ -13,7 +16,7 @@ export function AuthProvider({ children }) {
     const token = `falso-token-${nombreUsuario}`;
 
     //Logueo del administrador
-    if(nombreUsuario == "admin@gmail.com"){ // pass: test12
+    if (nombreUsuario == "admin@gmail.com") { // pass: test12
       setAdmin(true);
     }
 
@@ -27,15 +30,25 @@ export function AuthProvider({ children }) {
     setAdmin(false);
   };
 
-  function verificacionLogueo(){
-    return(
-      new Promise ((res, rej) => {
+  function loginGmail() {
+    logearseConGmail().then((data) => {
+      const token = `falso-token-${data.email}`;
+      setUsuario(data.email);
+      localStorage.setItem('authToken-ecommerce', token);
+    }).catch((error) => {
+      toast.error("Error al iniciar session con Gmail!.");
+    })
+  }
+
+  function verificacionLogueo() {
+    return (
+      new Promise((res, rej) => {
         const tokenUsuario = localStorage.getItem("authToken-ecommerce");
-        if(tokenUsuario && tokenUsuario == "falso-token-admin@gmail.com"){ //si existe el token y es el del admin
+        if (tokenUsuario && tokenUsuario == "falso-token-admin@gmail.com") { //si existe el token y es el del admin
           setAdmin(true);
           return;
         }
-        if(tokenUsuario){ //si existe el token
+        if (tokenUsuario) { //si existe el token
           setUsuario(tokenUsuario);
         }
       })
@@ -43,8 +56,9 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ usuario, login, logout, admin, verificacionLogueo }}>
+    <AuthContext.Provider value={{ usuario, login, logout, loginGmail, admin, verificacionLogueo }}>
       {children}
-    </AuthContext.Provider> );
+      <ToastContainer/>
+    </AuthContext.Provider>);
 }
 export const useAuthContext = () => useContext(AuthContext);

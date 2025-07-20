@@ -12,7 +12,7 @@ export default function Login() {
     const [password, setContrasenia] = useState('');
     const [mostrarInicioSesion, setMostrar] = useState(true);
     //accedo a la propiedad 'login' del useAuthContext
-    const { login, usuario, logout, admin } = useAuthContext();
+    const { login, usuario, logout, admin, loginGmail } = useAuthContext();
 
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ export default function Login() {
 
     //Inicio de sesion con datos de firebase (email y pass)
     function iniciarSesionConEmail(e) {
-        e.preventDefault();
+        e.preventDefault(); // Evita que la página se recargue
         logearseConEmail(user, password).then((usuario) => {
             login(user) //si trajo a 'usuario', loguea a user
             dispararAlerta("Inicio de sesion exitoso!!", "", "success", "Ok")
@@ -42,6 +42,10 @@ export default function Login() {
             else //Errores por defecto
                 dispararAlerta("Error al iniciar sesion", "Error: " + error, "error", "Cerrar");
         })
+    }
+    //Inicio de sesion con gmail
+    function iniciarSesionConGmail(e){
+        loginGmail();
     }
 
     //Registrar usuario a firebase (con email y contraseña)
@@ -102,8 +106,9 @@ export default function Login() {
                         <label className="form-label">Contraseña</label>
                         <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
                     </div>
-                    <button className="btn btn-success w-25 ">Ingresar</button>
+                    <button type='submit' className="btn btn-success w-25 ">Ingresar</button>
                     <button className="btn btn-dark w-25" onClick={mostrarFormulario}>Registrarse</button>
+                    <button className="btn btn-success w-25 " onClick={iniciarSesionConGmail}>Ingresar con Gmail</button>
                 </form>
             </div>
 
@@ -152,7 +157,7 @@ export default function Login() {
                         <label className="form-label">Contraseña</label>
                         <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
                     </div>
-                    <button className="btn btn-success w-25 ">Registrarse</button>
+                    <button type='submit' className="btn btn-success w-25 ">Registrarse</button>
                     <button className="btn btn-dark w-25" onClick={mostrarFormulario}>Iniciar Sesión</button>
                 </form>
             </div>

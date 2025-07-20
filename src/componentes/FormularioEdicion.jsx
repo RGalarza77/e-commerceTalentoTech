@@ -4,6 +4,8 @@ import { Navigate, useParams } from "react-router-dom";
 import { dispararAlerta } from "../assets/SweetAlet";
 import { useAuthContext } from "../contextos/AuthContext";
 import { Helmet } from "react-helmet";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function FormularioEdicion({ }) {
@@ -61,8 +63,8 @@ export default function FormularioEdicion({ }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validarFormulario() == true) {
-            editarProducto(producto).then((prod) => {
-                dispararAlerta('Actualizacion Producto', 'Producto actualizado correctamente.', 'success', 'Ok');
+            editarProducto(producto).then((prod) => {   
+                toast.success("Producto editado correctamente!");
             }).catch((error) => {
                 dispararAlerta('Error Actualizacion Producto', 'Hubo un problema al actualizar el producto.', 'error', 'Ok');
             })
@@ -116,6 +118,7 @@ export default function FormularioEdicion({ }) {
                 />
             </div>
             <button type="submit">Actualizar Producto</button>
+            <ToastContainer/>
         </form>
     );
 }

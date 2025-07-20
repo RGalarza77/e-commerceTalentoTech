@@ -5,6 +5,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCarritoContext } from "../contextos/CarritoContext";
 import { useAuthContext } from "../contextos/AuthContext";
 import { useProductosContext } from "../contextos/ProductosContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 export default function ProductoDetalle({  }) {
@@ -40,7 +43,8 @@ export default function ProductoDetalle({  }) {
 
     function agregarProducto() {
         if (cantidad < 1) return;
-        dispararAlerta("Producto Agregado", "Producto agregado al carrito", "success", "Ok");
+        toast.success("Producto agregado al carrito!");
+
 
         productoEncontrado.cantidad = cantidad;
         agregarAlCarrito(productoEncontrado);
@@ -75,6 +79,7 @@ export default function ProductoDetalle({  }) {
                 <button className="detalle-agregarCarrito" onClick={agregarProducto}>Agregar al carrito</button>}
                 {admin ? <button className="detalle-agregarCarrito" onClick={dispararEliminar}>Eliminar producto</button> : <></>}
             </div>
+        <ToastContainer/>
         </div>
     );
 }
