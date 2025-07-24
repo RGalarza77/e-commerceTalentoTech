@@ -3,14 +3,14 @@ import { Helmet } from "react-helmet";
 
 export default function Contacto() {
     return (
-        <div className="mx-auto" style={{ maxWidth: "500px" }}>
+        <div className="p-4 m-4 mx-auto" style={{ maxWidth: "500px" }} >
             {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
             <Helmet>
                 <title>Contacto | E-commerce</title>
                 <meta name="description" content="Contacto de la mi E-commerce." />
             </Helmet>
+            <form className="p-4 border rounded shadow">
             <h3 className="p-4">Contacto</h3>
-            <form className="p-4 border rounded shadow ">
                 <div class="form-floating mb-3">
                     <input type="email" className="form-control form-control-sm h-10" id="floatingInput" placeholder="Ingresa tu email" required />
                     <label htmlFor="floatingInput">Email</label>
