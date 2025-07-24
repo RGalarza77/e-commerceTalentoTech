@@ -7,6 +7,7 @@ const ProductosContext = createContext();
 export function ProductosProvider({ children }) {
     const [productos, setProductos] = useState([]);
     const [productoEncontrado, setProductoEncontrado] = useState([]);
+    const [productosSinFiltrar, setProductosSinFiltrar] = useState([]);
 
     function obtenerProductos() {
         return (
@@ -17,6 +18,7 @@ export function ProductosProvider({ children }) {
                     ).then((datos) => {
                         console.log(datos);
                         setProductos(datos);
+                        setProductosSinFiltrar(datos); //--> array de productos que se utiliza en la funcion de Busqueda
                         res(datos);
                     })
                     .catch((error) => {
@@ -112,7 +114,7 @@ export function ProductosProvider({ children }) {
                             method: 'DELETE',
                         });
                         if (!respuesta.ok) throw new Error('Error al eliminar');
-                        dispararAlerta('Producto Eliminado','Producto eliminado correctamente.', "success", "Ok");
+                        dispararAlerta('Producto Eliminado', 'Producto eliminado correctamente.', "success", "Ok");
                         res();
                     } catch (error) {
                         console.error(error.message);
@@ -123,10 +125,24 @@ export function ProductosProvider({ children }) {
         }
     }
 
+    function buscarProductos(nombreProducto) {
+        if (nombreProducto.length === 0) {
+            setProductos(productosSinFiltrar);
+            return productosSinFiltrar;
+        }
+
+        const productosFiltrados = productosSinFiltrar.filter((producto) => 
+            producto.nombre.toLowerCase().includes(nombreProducto.toLowerCase())
+        );//--> filtra todos los productos que su nombre contenga "nombreProducto"
+
+        setProductos(productosFiltrados);
+        return productosFiltrados;
+    }
+
 
     return (
 
-        < ProductosContext.Provider value={{ obtenerProductos, productos, agregarProducto, obtenerProducto, productoEncontrado, editarProducto, eliminarProducto }}>
+        < ProductosContext.Provider value={{ obtenerProductos, buscarProductos, productos, agregarProducto, obtenerProducto, productoEncontrado, editarProducto, eliminarProducto }}>
             {children}
         </ProductosContext.Provider >
     );

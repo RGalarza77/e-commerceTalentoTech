@@ -1,6 +1,6 @@
-.carta-contenedor{
-    border:solid;
-    border-color:  rgb(231, 139, 28);
+.carta-contenedor {
+    border: solid;
+    border-color: rgb(231, 139, 28);
     width: 30%;
     height: 100%;
     text-align: center;
@@ -10,24 +10,19 @@
     align-items: center;
 }
 
-.carta-imagen{
-    width: 50%;
-    height: 50%;
+.carta-imagen {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+
 }
 
-.carta-nombre{
+.carta-precio {
     font-optical-sizing: auto;
-    font-weight: bold;
-    font-size: 1.5rem;
-    text-shadow: 1px 3px 5px #0e3207;
+
 }
 
-.carta-precio{
-    font-optical-sizing: auto;
-    
-}
-
-.carta-boton{
+.carta-boton {
     padding: 10px 50px;
     color: whitesmoke;
     border-radius: 10px;
@@ -36,7 +31,8 @@
     transition: all 400ms ease;
     cursor: pointer;
 }
-.carta-boton:hover{
+
+.carta-boton:hover {
     color: rgb(0, 179, 255);
     background-color: rgba(11, 100, 216, 0.268);
     transform: translateY(-3%);
