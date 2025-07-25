@@ -97,18 +97,18 @@ export default function Login() {
                     <meta name="description" content="Login de nuestra tienda." />
                 </Helmet>
                 <form onSubmit={iniciarSesionConEmail} className=" d-flex flex-column justify-content-center align-items-center p-4 border rounded shadow w-50">
-                    <h2>Iniciar sesión</h2>
+                    <h2 className="mb-3">Iniciar sesión</h2>
                     <div className="mb-3 w-50">
                         <label className="form-label">Email</label>
                         <input type="email" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="form-control" required />
                     </div>
-                    <div className="mb-3 w-50">
+                    <div className=" mb-5 w-50">
                         <label className="form-label">Contraseña</label>
                         <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
                     </div>
-                    <button type='submit' className="btn btn-success w-25 ">Ingresar</button>
-                    <button className="btn btn-dark w-25" onClick={mostrarFormulario}>Registrarse</button>
-                    <button className="btn btn-success w-25 " onClick={iniciarSesionConGmail}>Ingresar con Gmail</button>
+                    <button type='submit' className="btn btn-success mb-2">Ingresar</button>
+                    <button className="btn btn-dark mb-2" onClick={mostrarFormulario}>Registrarse</button>
+                    <button className="btn btn-success mt-5" onClick={iniciarSesionConGmail}>Ingresar con Gmail</button>
                 </form>
             </div>
 
@@ -157,8 +157,8 @@ export default function Login() {
                         <label className="form-label">Contraseña</label>
                         <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
                     </div>
-                    <button type='submit' className="btn btn-success w-25 ">Registrarse</button>
-                    <button className="btn btn-dark w-25" onClick={mostrarFormulario}>Iniciar Sesión</button>
+                    <button type='submit' className="btn btn-success mb-2 ">Registrarse</button>
+                    <button className="btn btn-dark" onClick={mostrarFormulario}>Iniciar Sesión</button>
                 </form>
             </div>
 

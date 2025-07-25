@@ -9,4 +9,15 @@ export function dispararAlerta(titulo, texto, icono, textoBoton) {
     })
 }
 
+export function dispararAlertaConConfirmacion(titulo, texto, icono, botonConfirmar, botonoCancelar){
+    return Swal.fire({
+                title: titulo,
+                text: texto,
+                icon: icono,
+                showCancelButton: true,
+                confirmButtonText: botonConfirmar,
+                cancelButtonText: botonoCancelar,
+            })
+}
+
 

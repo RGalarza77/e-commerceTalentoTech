@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 import { useAuthContext } from "../contextos/AuthContext";
 import { useCarritoContext } from "../contextos/CarritoContext";
 import { Helmet } from "react-helmet";
+import { Row, Col, Container, Button } from "react-bootstrap";
 
 export default function Carrito() {
     const { usuario } = useAuthContext();
@@ -18,6 +19,10 @@ export default function Carrito() {
         borrarProductoCarrito(id);
     }
 
+    function funcionVaciarCarrito() {
+        vaciarCarrito();
+    }
+
     if (!usuario) {
         return (
             <Navigate to="/login" replace />
@@ -25,19 +30,14 @@ export default function Carrito() {
     }
 
     return (
-        <div className="carrito-contenedor">
+        <Container className="my-4">
+
             {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
             <Helmet>
                 <title>Carrito | E-commerce</title>
                 <meta name="description" content="Carrito de nuetro E-commerce." />
             </Helmet>
-            <div className="carrito-titulos">
-                <h2>Nombre</h2>
-                <h2>Imagen</h2>
-                <h2>Descripción</h2>
-                <h2>Precio Unitario</h2>
-                <h2>Precio Total</h2>
-            </div>
+
             {
                 productosCarrito.length > 0 ?
                     productosCarrito.map((producto) => (
@@ -48,11 +48,21 @@ export default function Carrito() {
                     ))
                     : <p>Carrito Vacio</p>
             }
+
             {
                 total > 0 ?
-                    <h1 className="carrito-totalAPagar">Total a pagar: ${total} </h1>
-                    : <></>
+                    <div>
+                        <h4 className="mt-4 text-end">Total a pagar: ${total} </h4>
+
+                        <Button variant="warning" className="mb-4" onClick={funcionVaciarCarrito}>
+                            Vaciar carrito
+                        </Button>
+
+                    </div>
+                    : 
+                    <></>
             }
-        </div>
+
+        </Container>
     );
 }

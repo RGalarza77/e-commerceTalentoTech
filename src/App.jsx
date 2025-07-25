@@ -15,6 +15,7 @@ import Login from './componentes/Login'
 import FormularioProducto from './componentes/FormularioProducto'
 import FormularioEdicion from './componentes/FormularioEdicion'
 import { useAuthContext } from './contextos/AuthContext'
+import NavBoostrap from './componentes/Nav'
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
 
     <Router>
       <div>
-        <Nav></Nav>
+        <NavBoostrap></NavBoostrap>
 
         <Routes>
           <Route path="/" element={<Home />} />
