@@ -107,29 +107,6 @@ export function ProductosProvider({ children }) {
         );
     }
 
-    // function eliminarProducto(id) {
-    //     const confirmar = window.confirm('¿Estás seguro de eliminar?');
-    //     if (confirmar) {
-    //         return (
-    //             new Promise(async (res, rej) => {
-    //                 try {
-    //                     const respuesta = await fetch(`https://682e9336746f8ca4a47d86df.mockapi.io/Productos/${id}`, {
-    //                         method: 'DELETE',
-    //                     });
-    //                     if (!respuesta.ok) throw new Error('Error al eliminar');
-    //                     dispararAlerta('Producto Eliminado', 'Producto eliminado correctamente.', "success", "Ok");
-    //                     res();
-    //                 } catch (error) {
-    //                     console.error(error.message);
-    //                     rej(error);
-    //                 }
-    //             })
-    //         )
-    //     }
-    // }
-
-
-
     function eliminarProducto(id) {
         return new Promise((res, rej) => {
             dispararAlertaConConfirmacion('¿Estás seguro de eliminar?', 'Esta acción no se puede deshacer','warning', 'Eliminar', 'Cancelar')

@@ -1,5 +1,5 @@
 .detalle-contenedor {
-    display: flex;
+    width: 100%;;
     gap: 30px;
     padding: 20px;
     background-color: rgb(231, 139, 28);
@@ -8,11 +8,11 @@
     margin: 20px auto;
     max-width: 800px;
     align-items: center;
-    height: 100%;
 }
 
 .detalle-imagen{
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     height: auto;
     border-radius: 10px;
     object-fit: cover;

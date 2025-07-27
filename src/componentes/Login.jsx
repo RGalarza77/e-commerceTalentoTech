@@ -83,33 +83,39 @@ export default function Login() {
     if (usuario || admin) {
         return (
             <form onSubmit={cerrarSesion}>
-                <button type='submit'>Cerrar Sesion</button>
+                <button className="btn btn-danger mt-5" type='submit'>Cerrar Sesion</button>
             </form>
         )
         //Mostrar form de inicio de sesion con email
     } else if (!usuario && mostrarInicioSesion) {
         {/* Inicio Sesion */ }
         return (
-            <div className='d-flex flex-column justify-content-center align-items-center '>
+            <div className='d-flex flex-column align-items-center min-vh-100'>
                 {/* Helmet ayuda a posicionar mejor la pag para el CEO, permitiendo poner mas <meta> y <title>*/}
                 <Helmet>
                     <title>Login | E-commerce</title>
                     <meta name="description" content="Login de nuestra tienda." />
                 </Helmet>
-                <form onSubmit={iniciarSesionConEmail} className=" d-flex flex-column justify-content-center align-items-center p-4 border rounded shadow w-50">
-                    <h2 className="mb-3">Iniciar sesión</h2>
-                    <div className="mb-3 w-50">
-                        <label className="form-label">Email</label>
-                        <input type="email" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="form-control" required />
-                    </div>
-                    <div className=" mb-5 w-50">
-                        <label className="form-label">Contraseña</label>
-                        <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
-                    </div>
-                    <button type='submit' className="btn btn-success mb-2">Ingresar</button>
-                    <button className="btn btn-dark mb-2" onClick={mostrarFormulario}>Registrarse</button>
-                    <button className="btn btn-success mt-5" onClick={iniciarSesionConGmail}>Ingresar con Gmail</button>
-                </form>
+
+                <div className='col-12 col-sm-10 col-md-6 col-lg-4'>
+                    <form onSubmit={iniciarSesionConEmail} className=" d-flex flex-column justify-content-center align-items-center p-4 border rounded shadow">
+                        <h2 className="mb-5">Iniciar sesión</h2>
+                        <div className="mb-3">
+                            <label className="form-label">Email</label>
+                            <input type="email" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="form-control" required />
+                        </div>
+                        <div className=" mb-4">
+                            <label className="form-label">Contraseña</label>
+                            <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
+                        </div>
+                        <button type='submit' className="btn btn-success mb-2">Ingresar</button>
+                        <h7 className="mt-3 mb-1">¿Aún no te registraste?</h7>
+                        <button className="btn btn-dark mb-2" onClick={mostrarFormulario}>Registrarse</button>
+                        <button className="btn btn-success mt-5" onClick={iniciarSesionConGmail}>Ingresar con Gmail</button>
+                    </form>
+
+                </div>
+
             </div>
 
             // /* form iniciar sesion sin bootstrap*/
@@ -142,24 +148,28 @@ export default function Login() {
     } else {
         {/* Registro */ }
         return (
-            < div className='d-flex flex-column justify-content-center align-items-center ' >
+            < div className='d-flex flex-column align-items-center min-vh-100' >
                 <Helmet>
                     <title>Registro Usuario | E-commerce</title>
                     <meta name="description" content="Registro para nuevos usuarios de nuestra e-commerce." />
                 </Helmet>
-                <form onSubmit={registrarUsuario} className=" d-flex flex-column justify-content-center align-items-center p-4 border rounded shadow w-50">
-                    <h2>Registrarse</h2>
-                    <div className="mb-3 w-50">
-                        <label className="form-label">Email</label>
-                        <input type="email" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="form-control" required />
-                    </div>
-                    <div className="mb-3 w-50">
-                        <label className="form-label">Contraseña</label>
-                        <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
-                    </div>
-                    <button type='submit' className="btn btn-success mb-2 ">Registrarse</button>
-                    <button className="btn btn-dark" onClick={mostrarFormulario}>Iniciar Sesión</button>
-                </form>
+
+                <div className='col-12 col-sm-10 col-md-6 col-lg-4'>
+                    <form onSubmit={registrarUsuario} className=" d-flex flex-column justify-content-center align-items-center p-4 border rounded shadow">
+                        <h2 className="mb-5">Registrarse</h2>
+                        <div className="mb-3">
+                            <label className="form-label">Email</label>
+                            <input type="email" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="form-control" required />
+                        </div>
+                        <div className="mb-4">
+                            <label className="form-label">Contraseña</label>
+                            <input type="password" value={password} onChange={(e) => setContrasenia(e.target.value)} className="form-control" required />
+                        </div>
+                        <button type='submit' className="btn btn-success mb-2 ">Registrarse</button>
+                        <button className="btn btn-dark mt-4 mb-4" onClick={mostrarFormulario}>Iniciar Sesión</button>
+                    </form>
+                </div>
+
             </div>
 
 
