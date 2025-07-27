@@ -8,7 +8,7 @@ export default function Carta({producto}) {
     
 
     return (
-        <Card>
+        <Card className="carta">
              <Card.Img src={producto.imagen} alt="imagen producto" className="carta-imagen" />
             <Card.Body>
                 <Card.Title>{producto.nombre}</Card.Title>

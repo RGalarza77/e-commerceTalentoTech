@@ -2,6 +2,7 @@ import React from "react";
 import Header from '../componentes/Header'
 import Main from '../componentes/Main'
 import Footer from '../componentes/Footer'
+import Carrusel from "../componentes/Carrusel";
 
 
 
@@ -42,7 +43,8 @@ export default function Home() {
     return (
         <div>
             <div>
-                <Header />
+                {/* <Header /> */}
+                <Carrusel/>
                 <Main />
                 <Footer></Footer>
 

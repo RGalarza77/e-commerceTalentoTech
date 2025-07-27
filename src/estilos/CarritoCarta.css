@@ -6,7 +6,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    background-color: rgb(231, 139, 28);
+    background-color: rgba(255, 255, 255, 0.588);
     border: 1px solid #ddd;
     border-radius: 8px;
     width: 100%;

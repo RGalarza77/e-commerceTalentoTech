@@ -1,11 +1,33 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { LuNotebook } from "react-icons/lu";
 
-function Footer() {  
-    return (  
-        <footer style={{ backgroundColor: "#f1f1f1", padding: "10px", textAlign: "center", marginTop: "20px", color:"green" }}>  
-            <p>&copy; 2024 - Mi Aplicación React</p>  
-        </footer>  
-    );  
-}  
+function Footer() {
+    return (
+        <footer style={{ backgroundColor: "rgba(252, 218, 177, 0.6)", padding: "10px", textAlign: "center", marginTop: "20px", color: "black" }}>
+
+            <ul className="list-unstyled">
+                <li className='icon-link icon-link-hover style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" p-2'>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                    </svg>
+                    <Link to="/about">Sobre Nosotros</Link>
+                </li>
+                <li className='icon-link icon-link-hover style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);"'>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                    </svg>
+                    <Link to="/contacto">Contactanos</Link>
+                </li>
+            </ul>
+
+             <p>&copy; 2024 - Mi Aplicación React</p>
+
+
+        </footer>
+    );
+}
 
 export default Footer;

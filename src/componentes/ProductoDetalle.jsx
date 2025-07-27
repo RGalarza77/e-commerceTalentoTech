@@ -7,7 +7,7 @@ import { useAuthContext } from "../contextos/AuthContext";
 import { useProductosContext } from "../contextos/ProductosContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Col, Row } from "react-bootstrap";
+import {Col, Row } from "react-bootstrap";
 
 
 
@@ -73,12 +73,12 @@ export default function ProductoDetalle({ }) {
                 <Col>
                     <div className="detalle-info">
                         <h2>{productoEncontrado.nombre}</h2>
-                        <p>{productoEncontrado.descripcion}</p>
-                        <p>{productoEncontrado.precio} $</p>
-                        <div className="detalle-contador">
-                            <button onClick={restarCantidad}>-</button>
+                        <p className="text-body-secondary">{productoEncontrado.descripcion}</p>
+                        <p className="fw-bolder">{productoEncontrado.precio} $</p>
+                        <div className="detalle-contador mb-5">
+                            <button className="btn btn-outline-dark" onClick={restarCantidad}>-</button>
                             <span>{cantidad}</span>
-                            <button onClick={sumarCantidad}>+</button>
+                            <button className="btn btn-outline-dark" onClick={sumarCantidad}>+</button>
                         </div>
                         {admin ? <Link to={"/admin/editarProducto/" + id}><button className="detalle-agregarCarrito">Editar Producto</button> </Link> :
                             <button className="detalle-agregarCarrito" onClick={agregarProducto}>Agregar al carrito</button>}
