@@ -4,12 +4,12 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDtLqpbLEc00uXB2I_u2_J0goOADU6_gcE",
-  authDomain: "e-commerce-d7cd8.firebaseapp.com",
-  projectId: "e-commerce-d7cd8",
-  storageBucket: "e-commerce-d7cd8.firebasestorage.app",
-  messagingSenderId: "460135626775",
-  appId: "1:460135626775:web:4f96020128f50129330452"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId
 };
 
 
