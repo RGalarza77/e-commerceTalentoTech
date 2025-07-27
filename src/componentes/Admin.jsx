@@ -21,8 +21,16 @@ export default function () {
                 <meta name="description" content="Menu de Administracion de nuestra tienda." />
             </Helmet>
             <h1>Menu Admin</h1>
-            <Link to="/admin/agregarProductos"><Button>Agregar Producto Nuevo</Button></Link>
-            <Link to="/admin"><Button>Editar Producto</Button></Link>
+            <ul class="list-unstyled">
+                <li className=" mt-3">
+                    <Link to="/admin/agregarProductos"><Button variant="dark">Agregar Producto Nuevo</Button></Link>
+                </li>
+                <li className=" mt-3">
+                    <Link to="/admin"><Button variant="dark">Editar Producto</Button></Link>
+                </li>
+
+            </ul>
+
         </div>
     );
 }

@@ -65,7 +65,7 @@ export default function CartaCarrito({ producto, funcionBorrar }) {
                 <span>Subtotal: {producto.cantidad * producto.precio} $</span>
             </Col>
             <Col md={2}>
-                <Button variant="danger" onClick={borrarDelCarrito}>
+                <Button className="btn btn-danger rounded-pill" onClick={borrarDelCarrito}>
                 X
                 </Button>
             </Col>
