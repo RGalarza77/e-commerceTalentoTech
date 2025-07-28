@@ -41,7 +41,7 @@ export default function CartaCarrito({ producto, funcionBorrar }) {
         //     <button onClick={borrarDelCarrito}>X</button>
         // </div>
 
-        <Card className="mb-3">
+        <Card className="carritoCarta-contenedor mb-3 ">
         <Card.Body>
             <Row className="align-items-center">
             <Col md={3}>

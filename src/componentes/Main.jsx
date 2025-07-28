@@ -24,8 +24,8 @@ function Main() {
                         <p className='text-center mb-4 font-monospace'>Este es un espacio creado para practicar y aprender sobre el diseño de e-commerce.
                             Aquí se aplicó los conceptos de diseño web, desarrollo frontend y lógica de ecommerce adquiridos durante
                             el curso de React de Talento Tech.
-                            <p className='mt-2'>¡Te invito a que explores todos nuestros productos!</p>
                         </p>
+                        <p className='mt-2'>¡Te invito a que explores todos nuestros productos!</p>
                         <Link to={"/productos"}><Button variant="dark" className="mt-3">Explorar productos</Button></Link>
 
                     </Col>

@@ -1,18 +1,25 @@
 
 .carritoCarta-contenedor{
-    border: solid;
+    /* border: solid;
     border-color: black;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    background-color: rgba(255, 255, 255, 0.588);
     border: 1px solid #ddd;
     border-radius: 8px;
     width: 100%;
     text-align: center;
     height: 150px;
-    color: black;
+    color: black; */
+    background-color: rgba(255, 255, 255, 0.588) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carritoCarta-contenedor:hover{
+    transform: scale(1.01);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .carritoCarta-imagen{

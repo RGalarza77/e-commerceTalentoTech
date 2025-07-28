@@ -32,8 +32,10 @@ export default function Carrusel({ }) {
                             style={{ height: "400px", objectFit: "cover" }}
                         />
                         <Carousel.Caption>
-                            <h5 style={{color:"white"}}>{producto.nombre}</h5>
-                            <p style={{color:"white"}}s>{producto.descripcion}</p>
+                            <h5 style={{ color: "orange", textShadow: "2px 2px 4px black" }}>{producto.nombre}</h5>
+                            <p style={{ color: "white", textShadow: "-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black" }}>{producto.descripcion}</p>
+                            
+
                         </Carousel.Caption>
 
                     </Carousel.Item>
